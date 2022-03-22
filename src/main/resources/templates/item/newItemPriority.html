@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-ao" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="webjars/bootstrap/5.0.0-beta1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="custom/custom.css" rel="stylesheet"/>
+    <title>PrioridadesApp</title>
+
+</head>
+<body>
+<div id="header" class="mb-4 mt-4">
+    <nav class="navbar-expand blue">
+        <div class="container">
+            <a class="btn btn-outline-primary" href="/">Voltar</a>
+        </div>
+    </nav>
+</div>
+<form style="max-width: 370px; margin: auto;" method="post" th:object="${itemPriority}">
+    <div class="container text-center" id="form">
+        <fieldset style="border: 5px #000000 wave" class="container border border-2">
+            <div class="mb-2 row">
+                <div class="col-12">
+                    <label class="col-12" for="name">Nome</label>
+                    <input class="col-12"
+                           id="name" maxlength="30"
+                           placeholder="Nome completo"
+                           size="30"
+                           th:field="*{name}"
+                           type="text"/>
+                </div>
+                <div class="col-12">
+                    <div class="col-12">
+                        <label>
+                            Valor
+                        </label>
+                    </div>
+                        <input class="col-12"
+                               placeholder="Em Kwanzas"
+                               th:field="*{value}"
+                               type="text"
+                               pattern="[0-9]{1,}"/>
+                </div>
+            </div>
+            <fieldset style="border: 5px #000000" class="border text-center mb-2">
+                <legend class="text-start"><h6>Grau de prioridade</h6></legend>
+                <div class="row">
+                    <label class="col-md-4 col-sm-12" for="low">
+                        <input id="low"
+                               th:field="*{priorityOrderNumber}"
+                               type="radio"
+                               value="0">
+                        Baixo
+                    </label>
+                    <label class="col-md-4 col-sm-12" for="medium">
+                        <input id="medium"
+                               th:field="*{priorityOrderNumber}"
+                               type="radio"
+                               value="1">
+                        Médio
+                    </label>
+                    <label class="col-md-4 col-sm-12" for="high">
+                        <input id="high"
+                               th:field="*{priorityOrderNumber}"
+                               type="radio"
+                               value="2">
+                        Alto
+                    </label>
+                </div>
+            </fieldset>
+            <div class="container row">
+                <div class="text-center mb-4">
+                    <button class="btn btn-success col-lg-4 col-sm-8" type="submit">Salvar</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</form>
+
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-ao" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="webjars/materializecss/1.0.0/css/materialize.css" rel="stylesheet" type="text/css"/>
+    <link href="custom/custom.css" rel="stylesheet" type="text/css"/>
+    <link href="material-icons/iconfont/material-icons.css" rel="stylesheet"/>
+    <title>PrioridadesApp</title>
+</head>
+<body>
+<header>
+    <nav class="light-blue white-text">
+        <div class="container center">
+            <h3 class="title">PrioritiesApp</h3>
+        </div>
+    </nav>
+</header>
+<div th:if="${mostra}">
+    <table class="container">
+        <thead>
+        <tr class="row hide-on-small-only">
+            <th class="col m2">Nome</th>
+            <th class="col m2">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row" th:each="item : ${items}">
+            <td class="col s12 m2">
+                <span class="hide-on-med-and-up">Nome: </span>
+                <b><span th:class="${(item.getPriorityOrderNumber() == 2 ? 'red-text':
+                                     (item.getPriorityOrderNumber() == 1 ? 'yellow-text': 'green-text'))}"
+                         th:text="${item.name}"></span></b>
+            </td>
+            <td class="col s12 m2">
+                <span class="hide-on-med-and-up">Valor: </span>
+                <span th:text="${item.value}"></span> Kzs
+            </td>
+            <td class="col s4 m2">
+                <a th:class="${'btn waves-effect waves-light ' + (item.canUpOrder() ? 'ative': 'disabled')}"
+                   th:href="${#mvc.url('IPC#upOrder').arg(0, item.id).build()}">
+                    <span class="hide-on-small-and-down">Subir</span>
+                    <img class="hide-on-med-and-up" src="icons/up.png" alt=""/>
+                </a>
+            </td>
+            <td class="col s4 m2">
+                <a th:class="${'btn waves-effect waves-light ' + (item.canDownOrder() ? 'ative': 'disabled')}"
+                   th:href="${#mvc.url('IPC#downOrder').arg(0, item.id).build()}">
+                    <span class="hide-on-small-and-down">Descer</span>
+                    <img class="hide-on-med-and-up" src="icons/down.png" alt=""/>
+                </a>
+            </td>
+            <td class="col s4 m2">
+                <a class="btn waves-effect waves-light red"
+                   th:href="${#mvc.url('IPC#deleteItem').arg(0, item.id).build()}">
+                    <span class="hide-on-small-only">Remover</span>
+                    <img class="hide-on-med-and-up" src="icons/remove.png" alt=""/>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div style="position:absolute;bottom: 45px; right: 45px;">
+    <a class="btn btn-floating waves-effect waves-light light-blue" href="/novo-item">
+        <span class="material-icons" style="margin-top: 8px;">add_circle_outline</span>
+    </a>
+</div>
+<script th:src="@{materialize/js/materialize.min.js}"></script>
+
+</body>
+</html>
